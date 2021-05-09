@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xml:lang="en">
+
+<ui:composition template="basic.xhtml">
+
+    <ui:define name="top">
+        UNI S6 JEA - Exercise 2 - Spellchecker - Eric ROMANG
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="homeform">
+            <h:panelGrid id="homepanel">
+                <h:outputLabel value="Do you want to play to hangman?"/><br/>
+                <h:commandButton id="play" action="#{main.play}" value="Play"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+</html>
