@@ -9,31 +9,75 @@
 <ui:composition template="basic.xhtml">
 
     <ui:define name="top">
-        UNI S6 JEA - Exercise 2 - Spell checker - Eric ROMANG
+        <h1>UNI S6 JEA - Exercise 2 - Spellchecker - Eric ROMANG</h1>
     </ui:define>
 
     <ui:define name="content">
         <h:form id="homeform">
-            <h:panelGrid id="dashboard" style="background-color:#BFF1B5; border: thick solid green; padding: 20px;" columns="2">
-                <h:outputLabel value="Number of suggested corrections:" style="font-weight: bold; text-align: right"/>
-                <h:outputText id="attemptsTotal" value="#{spellchecker.nbrSuggestedCorrection}" />
-                <h:outputLabel value="Suggested corrections:" style="font-weight: bold; text-align: right"/>
-                <h:outputText id="lastAttemptedLetter" value="#{spellchecker.lastSuggestedReplacement}" />
-            </h:panelGrid>
-            <p:remoteCommand name="nextMessage" actionListener="#{messageBean.firstUnreadMessage}"
-                             oncomplete="updateMessages(xhr, status, args);"/>
-            <br />
-            <br />
-            <h:panelGrid columns="2">
-                <h:outputText value="Spell corrected text" style="font-weight: bold; text-align: right"/>
-                <h:outputText value="#{spellchecker.correctedText}" id="correctedText"/>
-                <h:outputText value="" />
-                <h:outputText value="" />
-                <h:outputText value="Input text" style="font-weight: bold; text-align: right"/>
-                <p:inputTextarea rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
-                <h:outputText value=""/>
-                <h:commandButton id="spellcheck" action="#{spellchecker.spellcheck}" value="Spell check again"/>
-            </h:panelGrid>
+
+            <table>
+                <tr style="vertical-align: top">
+                    <td colspan="2">
+                        <p:fieldset legend="Spell check results">
+                            <table>
+                                <tr>
+                                    <td align="right"><div class="p-text-bold">Number of suggested corrections :</div></td>
+                                    <td><h:outputText id="attemptsTotal" value="#{spellchecker.nbrSuggestedCorrection}" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="right"><div class="p-text-bold">Suggested corrections :</div></td>
+                                    <td><h:outputText id="lastAttemptedLetter" value="#{spellchecker.lastSuggestedReplacement}" /></td>
+                                </tr>
+                            </table>
+                        </p:fieldset>
+                    </td>
+                </tr>
+                <tr style="vertical-align: top">
+                    <td>
+                        <p:fieldset legend="Your original text">
+                            <div class="card">
+                                <div class="p-field p-grid">
+                                    <label for="inputText" class="p-col-fixed" style="width:100px; font-weight: bold">Text</label>
+                                    <div class="p-col">
+                                        <p:inputTextarea id="inputText" rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
+                                    </div>
+                                </div>
+                                <div class="p-field p-grid">
+                                    <label for="spellcheck" class="p-col-fixed" style="width:100px"></label>
+                                    <div class="p-col">
+                                        <h:commandButton id="spellcheck" action="#{spellchecker.spellCheck}" value="Spell check again"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
+                    </td>
+                    <td>
+                        <p:fieldset legend="Proposed corrected text">
+                            <div class="card">
+                                <div class="p-field p-grid">
+                                    <label for="inputText" class="p-col-fixed" style="width:100px; font-weight: bold">Text</label>
+                                    <div class="p-col">
+                                        <p:inputTextarea id="correctedText" readonly="true" rows="6" cols="33" value="#{spellchecker.correctedText}" lang="en"/>
+                                        <p:inputText type="hidden" id="hiddenCorrectedText" value="#{spellchecker.correctedText}"/>
+                                    </div>
+                                </div>
+                                <div class="p-field p-grid">
+                                    <label for="spellcheck" class="p-col-fixed" style="width:100px"></label>
+                                    <div class="p-col">
+                                        <h:commandButton id="replace" value="Use the proposed corrected text" onclick="setValue()" />
+                                        <script type="text/javascript">
+                                            function setValue() {
+                                                var val1 = document.getElementById('homeform:hiddenCorrectedText').value;
+                                                document.getElementById('homeform:inputText').value = val1;
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </p:fieldset>
+                    </td>
+                </tr>
+            </table>
         </h:form>
     </ui:define>
 

@@ -55,7 +55,7 @@ public class Speller implements Serializable {
         return nbrSuggestedCorrection;
     }
 
-    public String spellcheck() throws Exception {
+    public String spellCheck() throws Exception {
         logger.info("Clicked on spell check button");
         correctedText = sc.spellCheck(text);
         return CHECK;

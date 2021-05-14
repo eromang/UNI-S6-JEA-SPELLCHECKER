@@ -30,8 +30,11 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
 
         logger.info("Start to check with JLanguageTool");
 
+        // Init
         int stringIndex = 0;
         int nbrSuggestedCorrection = 0;
+        setNbrSuggestedCorrection(nbrSuggestedCorrection);
+        setLastSuggestedReplacement("None");
 
         // Initiate JLanguageTool
         lang = new BritishEnglish();
@@ -66,8 +69,11 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
                 matchingWord = inputString.substring(matchFrom, matchTo);
 
             } else {
+                // Suggested remplacements exists
+
                 nbrSuggestedCorrection++;
                 setNbrSuggestedCorrection(nbrSuggestedCorrection);
+
                 logger.info("Nbr of suggested correction is : " + nbrSuggestedCorrection);
                 logger.info("getSuggestedReplacements is not empty");
 

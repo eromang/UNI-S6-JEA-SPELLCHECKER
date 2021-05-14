@@ -10,18 +10,27 @@
 <ui:composition template="basic.xhtml">
 
     <ui:define name="top">
-        UNI S6 JEA - Exercise 2 - Spell checker - Eric ROMANG
+        <h1>UNI S6 JEA - Exercise 2 - Spellchecker - Eric ROMANG</h1>
     </ui:define>
 
     <ui:define name="content">
         <h:form id="homeform">
-            <h:panelGrid columns="2">
-                <h:outputText value="Text to spell check" style="font-weight: bold"/>
-                <p:inputTextarea rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
-                <h:outputText value=""/>
-                <p:commandButton id="spellcheck" type="button" value="Submit" icon="pi pi-check" iconPos="right" action="#{spellchecker.spellcheck}"/>
-                <h:commandButton id="spellcheck" action="#{spellchecker.spellcheck}" value="Spell Check !"/>
-            </h:panelGrid>
+                <p:fieldset legend="Spell check your text">
+                    <div class="card">
+                        <div class="p-field p-grid">
+                            <label for="inputText" class="p-col-fixed" style="width:100px">Text</label>
+                            <div class="p-col">
+                                <p:inputTextarea id="inputText" rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
+                            </div>
+                        </div>
+                        <div class="p-field p-grid">
+                            <label for="spellcheck" class="p-col-fixed" style="width:100px"></label>
+                            <div class="p-col">
+                                <h:commandButton id="spellcheck" value="Submit" action="#{spellchecker.spellCheck}" />
+                            </div>
+                        </div>
+                    </div>
+                </p:fieldset>
         </h:form>
     </ui:define>
 
