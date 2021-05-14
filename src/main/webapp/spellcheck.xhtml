@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xml:lang="en">
+
+<ui:composition template="basic.xhtml">
+
+    <ui:define name="top">
+        UNI S6 JEA - Exercise 2 - Spell checker - Eric ROMANG
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="homeform">
+            <h:panelGrid id="dashboard" style="background-color:#BFF1B5; border: thick solid green; padding: 20px;" columns="2">
+                <h:outputLabel value="Number of suggested corrections:" style="font-weight: bold; text-align: right"/>
+                <h:outputText id="attemptsTotal" value="#{spellchecker.nbrSuggestedCorrection}" />
+                <h:outputLabel value="Suggested corrections:" style="font-weight: bold; text-align: right"/>
+                <h:outputText id="lastAttemptedLetter" value="#{spellchecker.lastSuggestedReplacement}" />
+            </h:panelGrid>
+            <p:remoteCommand name="nextMessage" actionListener="#{messageBean.firstUnreadMessage}"
+                             oncomplete="updateMessages(xhr, status, args);"/>
+            <br />
+            <br />
+            <h:panelGrid columns="2">
+                <h:outputText value="Spell corrected text" style="font-weight: bold; text-align: right"/>
+                <h:outputText value="#{spellchecker.correctedText}" id="correctedText"/>
+                <h:outputText value="" />
+                <h:outputText value="" />
+                <h:outputText value="Input text" style="font-weight: bold; text-align: right"/>
+                <p:inputTextarea rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
+                <h:outputText value=""/>
+                <h:commandButton id="spellcheck" action="#{spellchecker.spellcheck}" value="Spell check again"/>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+</html>

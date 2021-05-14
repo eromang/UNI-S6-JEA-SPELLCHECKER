@@ -19,7 +19,6 @@
                 <h:outputText value="Text to spell check" style="font-weight: bold"/>
                 <p:inputTextarea rows="6" cols="33" value="#{spellchecker.text}" lang="en"/>
                 <h:outputText value=""/>
-                <p:commandButton id="spellcheck" type="button" value="Submit" icon="pi pi-check" iconPos="right" action="#{spellchecker.spellcheck}"/>
                 <h:commandButton id="spellcheck" action="#{spellchecker.spellcheck}" value="Spell Check !"/>
             </h:panelGrid>
         </h:form>
