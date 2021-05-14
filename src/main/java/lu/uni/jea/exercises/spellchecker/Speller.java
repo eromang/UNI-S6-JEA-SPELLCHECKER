@@ -24,7 +24,8 @@ import java.util.logging.Logger;
 @SessionScoped
 public class Speller implements Serializable {
 
-    private static final String CHECK = "spellcheck";
+    private static final String CHECK_INITIAL = "spell_initial";
+    private static final String CHECK_AGAIN = "spell_again";
     private static final String BACK = "back"; // not used
 
     private static final Logger logger = Logger.getLogger("Speller");
@@ -55,10 +56,17 @@ public class Speller implements Serializable {
         return nbrSuggestedCorrection;
     }
 
-    public String spellcheck() throws Exception {
+    public String spellCheck() throws Exception {
         logger.info("Clicked on spell check button");
         correctedText = sc.spellCheck(text);
-        return CHECK;
+        return CHECK_INITIAL;
+    }
+
+    public String spellCheckAgain() throws Exception {
+        logger.info("Clicked on spell check again button");
+        correctedText = sc.spellCheck(text);
+        logger.info("Corrected text is " + correctedText);
+        return CHECK_AGAIN;
     }
 
     public String back() {

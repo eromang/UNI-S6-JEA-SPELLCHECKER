@@ -93,6 +93,7 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
         }
 
         sb.append(buffer, stringIndex, (buffer.length - stringIndex));
+        logger.info("Corrected phrase is " + sb.toString());
         return sb.toString();
     }
 
