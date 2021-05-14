@@ -2,6 +2,7 @@ package lu.uni.jea.exercises.spellchecker.ejb;
 
 import javax.ejb.Stateless;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
     private char[] buffer;
     private int idx = 0;
     private int nbrSuggestedCorrection;
+    private List<String> suggestions;
 
     @Override
     public String spellCheck(String inputString) throws IOException {
@@ -34,11 +36,14 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
         int stringIndex = 0;
         int nbrSuggestedCorrection = 0;
         setNbrSuggestedCorrection(nbrSuggestedCorrection);
-        setLastSuggestedReplacement("None");
+        setLastSuggestedReplacement("None"); // todo to delete
 
         // Initiate JLanguageTool
         lang = new BritishEnglish();
         langTool = new JLanguageTool(lang);
+
+        // Init list of suggestions
+        suggestions = new ArrayList<>();
 
         // Initiate a string builder to reconstruct the submitted phrase
         StringBuilder sb = new StringBuilder();
@@ -87,10 +92,11 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
                 String errorMessage = String.format("Got these suggestions: %s, for %s ",
                         match.getSuggestedReplacements(), matchingWord);
                 logger.info(errorMessage);
+                suggestions.add(errorMessage);
 
                 // Get the first suggestion
                 matchingWord = match.getSuggestedReplacements().get(0);
-                setLastSuggestedReplacement(matchingWord);
+                setLastSuggestedReplacement(matchingWord); // todo to delete
 
             }
 
@@ -112,13 +118,20 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
         this.nbrSuggestedCorrection = nbrSuggestedCorrection;
     }
 
-    @Override
+    @Override // todo to delete
     public String getLastSuggestedReplacement() {
         return lastSuggestedReplacement;
     }
 
-    @Override
+    @Override // todo to delete
     public void setLastSuggestedReplacement(String lastSuggestedReplacement) {
         this.lastSuggestedReplacement = lastSuggestedReplacement;
     }
+
+    @Override
+    public List<String> getSuggestions() {
+        return suggestions;
+    }
+
+
 }

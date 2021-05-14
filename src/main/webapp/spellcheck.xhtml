@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xml:lang="en">
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en">
 
 <ui:composition template="basic.xhtml">
 
@@ -21,12 +22,16 @@
                         <p:fieldset legend="Spell check results">
                             <table>
                                 <tr>
-                                    <td align="right"><div class="p-text-bold">Number of suggested corrections :</div></td>
+                                    <td style="horiz-align: right"><div class="p-text-bold">Number of suggested corrections :</div></td>
                                     <td><h:outputText id="attemptsTotal" value="#{spellchecker.nbrSuggestedCorrection}" /></td>
                                 </tr>
                                 <tr>
-                                    <td align="right"><div class="p-text-bold">Suggested corrections :</div></td>
-                                    <td><h:outputText id="lastAttemptedLetter" value="#{spellchecker.lastSuggestedReplacement}" /></td>
+                                    <td style="vertical-align: top; horiz-align: right"><div class="p-text-bold">Suggested corrections :</div></td>
+                                    <td style="vertical-align: top; horiz-align: right">
+                                        <ui:repeat value="#{spellchecker.suggestions}" var="suggestion">
+                                            <h:outputText value="#{suggestion}" /><br />
+                                        </ui:repeat>
+                                    </td>
                                 </tr>
                             </table>
                         </p:fieldset>

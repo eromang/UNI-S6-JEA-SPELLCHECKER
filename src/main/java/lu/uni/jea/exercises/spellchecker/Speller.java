@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,7 +33,8 @@ public class Speller implements Serializable {
     private String text;
     private String correctedText;
     private int nbrSuggestedCorrection;
-    private String lastSuggestedRemplacement;
+    private String lastSuggestedRemplacement; // todo to delete
+    private List<String> suggestions;
 
     @EJB
     private SpellCheckerBeanLocal sc;
@@ -43,7 +45,7 @@ public class Speller implements Serializable {
         correctedText = "";
     }
 
-    public String getLastSuggestedReplacement() {
+    public String getLastSuggestedReplacement() { // todo to delete
         lastSuggestedRemplacement = sc.getLastSuggestedReplacement();
         logger.info("Last suggested correction : " + lastSuggestedRemplacement);
         return lastSuggestedRemplacement;
@@ -81,5 +83,10 @@ public class Speller implements Serializable {
 
     public void setCorrectedText(String correctedText) {
         this.correctedText = correctedText;
+    }
+
+    public List<String> getSuggestions() {
+        suggestions = sc.getSuggestions();
+        return suggestions;
     }
 }
