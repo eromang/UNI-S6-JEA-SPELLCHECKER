@@ -21,7 +21,7 @@ public class SpellCheckerBean implements SpellCheckerBeanLocal {
     private JLanguageTool langTool = null;
     private StringBuilder sb;
     private String matchingWord;
-    private String lastSuggestedReplacement;
+    private String lastSuggestedReplacement; // todo to delete
     private char[] buffer;
     private int idx = 0;
     private int nbrSuggestedCorrection;
